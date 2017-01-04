@@ -70,12 +70,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//1. check whether password is set
 	//2. set the flag 
-	/*ÀûÓÃÕâ¸ö·µ»ØÖµÀ´ÅĞ¶ÏÊÇ·ñÎÄ¼şÒÑ¾­±»Ò»¸öinstance´ò¿ª*/
+	/*åˆ©ç”¨è¿™ä¸ªè¿”å›å€¼æ¥åˆ¤æ–­æ˜¯å¦æ–‡ä»¶å·²ç»è¢«ä¸€ä¸ªinstanceæ‰“å¼€*/
 	//exist: 1, not exist:0, already open:-1
 	ret = keyfile->CheckStatus();
 	if (-1 == ret)
 	{	
-		MessageBox(GetForegroundWindow(), L"³ÌĞòÒÑ¾­ÔËĞĞÖĞ\n²»ÒªÖØ¸´ÔËĞĞ£¡", L"´íÎó", MB_OK | MB_ICONERROR);
+		MessageBox(GetForegroundWindow(), L"ç¨‹åºå·²ç»è¿è¡Œä¸­\nä¸è¦é‡å¤è¿è¡Œï¼", L"é”™è¯¯", MB_OK | MB_ICONERROR);
 		delete KeyFiles::GetInstance();
 		delete PwdDlg::GetInstance();
 		delete TrayDlg::GetInstance();
