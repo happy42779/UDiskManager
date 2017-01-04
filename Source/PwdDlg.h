@@ -107,7 +107,7 @@ LRESULT CALLBACK PwdDlg::WndProcPwd(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
 				UpdateWindow(m_phInstance->GetCallingWND());
 				SetForegroundWindow(m_phInstance->GetCallingWND());
 				SetWindowLong(m_phInstance->GetCallingWND(), GWL_USERDATA, (LONG)FALSE);//false here means verifying password failed
-				////×îÖÕÎªÁË»ñÈ¡traydlgµÄ¾ä±ú£¬callingWND¿ÉÄÜ·µ»Øblockingdlg»òÕßtraydlgµÄ¾ä±ú£¬Èç¹û·µ»Ø´íÎó³¢ÊÔÁíÍâÒ»¸ö
+				////æœ€ç»ˆä¸ºäº†è·å–traydlgçš„å¥æŸ„ï¼ŒcallingWNDå¯èƒ½è¿”å›blockingdlgæˆ–è€…traydlgçš„å¥æŸ„ï¼Œå¦‚æœè¿”å›é”™è¯¯å°è¯•å¦å¤–ä¸€ä¸ª
 				KeyFiles::GetInstance()->SendWrongRecord(m_phInstance->hOwner);
 			}
 		}
@@ -165,7 +165,7 @@ LRESULT CALLBACK PwdDlg::WndProcPwd(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
 				SendMessage(m_phInstance->m_hEdit, EM_GETLINE, NULL, (LPARAM)m_phInstance->szEdit);
 				if (!KeyFiles::GetInstance()->VerifyPWD(m_phInstance->szEdit))
 				{
-					MessageBox(GetForegroundWindow(), L"ÃÜÂë´íÎó£¡\nÇëÖØĞÂÊäÈë...", L"ERROR", MB_OK | MB_ICONERROR);
+					MessageBox(GetForegroundWindow(), L"å¯†ç é”™è¯¯ï¼\nè¯·é‡æ–°è¾“å…¥...", L"ERROR", MB_OK | MB_ICONERROR);
 					//clear input in the editbox
 					KeyFiles::GetInstance()->RecordWrong();
 					m_phInstance->ClearInput();
@@ -225,7 +225,7 @@ BOOL PwdDlg::InitDlg(HINSTANCE& hInstance, HWND& hParent)
 	}
 
 	//create dlg
-	m_pwdDlg = CreateWindow(szAppName, L"ÇëÊäÈë¹ÜÀíÔ±ÃÜÂë£º",
+	m_pwdDlg = CreateWindow(szAppName, L"è¯·è¾“å…¥ç®¡ç†å‘˜å¯†ç ï¼š",
 		WS_DLGFRAME| WS_CAPTION, (x-250)/2, (y-120)/2, 250, 150, hParent, NULL, hInstance, NULL);
 	if (NULL == m_pwdDlg)
 	{
@@ -254,7 +254,7 @@ BOOL PwdDlg::InitDlg(HINSTANCE& hInstance, HWND& hParent)
 	SendMessage(m_hEdit, EM_SETLIMITTEXT, 18, NULL);
 	
 	//create Button ok
-	m_hBtnOK = CreateWindow(L"BUTTON", L"È·¶¨", WS_CHILD | WS_VISIBLE \
+	m_hBtnOK = CreateWindow(L"BUTTON", L"ç¡®å®š", WS_CHILD | WS_VISIBLE \
 		| BS_CENTER | BS_PUSHBUTTON | BS_PUSHLIKE, 
 		(250 - 100) / 2 - 10, 10 + 30 + 10 + 30, 40, 25, m_pwdDlg, NULL, hInstance, NULL);
 	if (NULL == m_hBtnOK)
@@ -263,7 +263,7 @@ BOOL PwdDlg::InitDlg(HINSTANCE& hInstance, HWND& hParent)
 		return NULL;
 	}
 	
-	m_hBtnCancel = CreateWindow(L"BUTTON", L"È¡Ïû", WS_CHILD | WS_VISIBLE \
+	m_hBtnCancel = CreateWindow(L"BUTTON", L"å–æ¶ˆ", WS_CHILD | WS_VISIBLE \
 		| BS_CENTER | BS_PUSHBUTTON | BS_PUSHLIKE,
 		(250 - 100) / 2 + 30 + 40, 10 + 30 + 10 + 30, 40, 25, m_pwdDlg, NULL, hInstance, NULL);
 	if (NULL == m_hBtnCancel)
@@ -290,10 +290,10 @@ void PwdDlg::ShowModal(HWND& hWnd)
 	ClearInput();
 	SetInputFocus();
 
-	if (ShowWindow(m_pwdDlg, SW_SHOW))	//Èç¹ûµ±Ç°ÃÜÂë¿òÏÔÊ¾ÖĞ£¬´Ëº¯ÊıÔÙ´Î±»µ÷ÓÃ£¬»áµ¼ÖÂ³ÌĞòÖĞÓĞ²ĞÁôµÄÏûÏ¢Ñ­»·£¬×îºó³ÌĞò²¢²»»áÕæÕıÍË³ö
+	if (ShowWindow(m_pwdDlg, SW_SHOW))	//å¦‚æœå½“å‰å¯†ç æ¡†æ˜¾ç¤ºä¸­ï¼Œæ­¤å‡½æ•°å†æ¬¡è¢«è°ƒç”¨ï¼Œä¼šå¯¼è‡´ç¨‹åºä¸­æœ‰æ®‹ç•™çš„æ¶ˆæ¯å¾ªç¯ï¼Œæœ€åç¨‹åºå¹¶ä¸ä¼šçœŸæ­£é€€å‡º
 		return;
 
-	while (GetMessage(&msg, 0, 0, 0))	//µÚ¶ş¸ö²ÎÊı±ØĞëÎª0£¬²»È»Ö÷ÏûÏ¢Ñ­»·±»disableºó£¬¶Ô´°¿Ú²Ù×÷ÎŞ·´Ó¦£¬ÏµÍ³»áÒÔÎªÊÇ´°¿ÚÎŞ·¨ÇÀÕ¼×ÊÔ´´Ó¶ø½øĞĞ½Ó¹Ü
+	while (GetMessage(&msg, 0, 0, 0))	//ç¬¬äºŒä¸ªå‚æ•°å¿…é¡»ä¸º0ï¼Œä¸ç„¶ä¸»æ¶ˆæ¯å¾ªç¯è¢«disableåï¼Œå¯¹çª—å£æ“ä½œæ— ååº”ï¼Œç³»ç»Ÿä¼šä»¥ä¸ºæ˜¯çª—å£æ— æ³•æŠ¢å èµ„æºä»è€Œè¿›è¡Œæ¥ç®¡
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
@@ -307,7 +307,7 @@ BOOL PwdDlg::Show()
 	MSG msg;
 	
 	//set the window title to setting password.
-	SetWindowText(m_pwdDlg, L"ÇëÉèÖÃ³¬¼¶ÃÜÂë£º");
+	SetWindowText(m_pwdDlg, L"è¯·è®¾ç½®è¶…çº§å¯†ç ï¼š");
 	//SetWindowLong(m_hConfrmEdit, GWL_STYLE, WS_VISIBLE&GetWindowLong(m_hConfrmEdit, GWL_STYLE));
 	ShowWindow(m_hConfrmEdit, SW_SHOW);
 	ShowWindow(m_pwdDlg, SW_SHOW);
@@ -323,7 +323,7 @@ BOOL PwdDlg::Show()
  	if (!bPWDInitiating)	//if password set successfully
 	{
 		ShowWindow(m_pwdDlg, SW_HIDE);
-		SendMessage(m_pwdDlg, WM_SETTEXT, NULL, (LPARAM)L"ÇëÊäÈë³¬¼¶ÃÜÂë£º");
+		SendMessage(m_pwdDlg, WM_SETTEXT, NULL, (LPARAM)L"è¯·è¾“å…¥è¶…çº§å¯†ç ï¼š");
 		ShowWindow(m_hConfrmEdit, SW_HIDE);
 		return TRUE;
 	}
