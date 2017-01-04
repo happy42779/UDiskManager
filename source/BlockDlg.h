@@ -78,7 +78,7 @@ LRESULT CALLBACK BlockDlg::WndProcBlock(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
 			nIndexSelected = SendMessage(m_phInstance->m_comboBox, CB_GETCURSEL, 0, 0);
 			if (CB_ERR == nIndexSelected)
 			{
-				MessageBox(GetForegroundWindow(), L"«Î—°‘Ò“™≤Ÿ◊˜µƒ…Ë±∏", L"—°‘ÒŒﬁ–ß", MB_OK | MB_ICONERROR);
+				MessageBox(GetForegroundWindow(), L"ËØ∑ÈÄâÊã©Ë¶ÅÊìç‰ΩúÁöÑËÆæÂ§á", L"ÈÄâÊã©Êó†Êïà", MB_OK | MB_ICONERROR);
 				return TRUE;
 			}
 			memset(volSelected, 0, sizeof(volSelected) >> 1);
@@ -106,7 +106,7 @@ LRESULT CALLBACK BlockDlg::WndProcBlock(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
 			nIndexSelected = SendMessage(m_phInstance->m_comboBox, CB_GETCURSEL, 0, 0);
 			if (CB_ERR == nIndexSelected)
 			{
-				MessageBox(GetForegroundWindow(), L"«Î—°‘Ò“™≤Ÿ◊˜µƒ…Ë±∏", L"—°‘ÒŒﬁ–ß", MB_OK | MB_ICONERROR);
+				MessageBox(GetForegroundWindow(), L"ËØ∑ÈÄâÊã©Ë¶ÅÊìç‰ΩúÁöÑËÆæÂ§á", L"ÈÄâÊã©Êó†Êïà", MB_OK | MB_ICONERROR);
 				return TRUE;
 			}
 			//verify passcode
@@ -192,29 +192,29 @@ BOOL BlockDlg::DisplayInfo(HWND hWnd)
 	pDev = DevInfo::GetInstance()->QueryInfoRequired();
 	
 	//show information in list box and combo box
-	//…Ë±∏√˚≥∆£¨ …Ë±∏π“‘ÿ£¨…Ë±∏
+	//ËÆæÂ§áÂêçÁß∞Ôºå ËÆæÂ§áÊåÇËΩΩÔºåËÆæÂ§á
 	memset(szBuf, 0, sizeof(szBuf));
-	SendMessage(m_listBox, LB_ADDSTRING, 0, (LPARAM)L"“—ºÏ≤‚µΩ–¬µƒUSB…Ë±∏Ω”»Î");
+	SendMessage(m_listBox, LB_ADDSTRING, 0, (LPARAM)L"Â∑≤Ê£ÄÊµãÂà∞Êñ∞ÁöÑUSBËÆæÂ§áÊé•ÂÖ•");
 		
-	wsprintf(szBuf, L"…Ë±∏√˚≥∆£∫%s", pDev->szVolName);
+	wsprintf(szBuf, L"ËÆæÂ§áÂêçÁß∞Ôºö%s", pDev->szVolName);
 	SendMessage(m_listBox, LB_ADDSTRING, 0, (LPARAM)szBuf);
 	SendMessage(hWnd, LB_INSERTSTRING, 0, (LPARAM)szBuf);
 
 	memset(szBuf, 0, sizeof(szBuf));
-	wsprintf(szBuf, L"π“‘ÿ≈Ã∑˚£∫%c", pDev->szVolMask);
+	wsprintf(szBuf, L"ÊåÇËΩΩÁõòÁ¨¶Ôºö%c", pDev->szVolMask);
 	SendMessage(m_listBox, LB_ADDSTRING, 0, (LPARAM)szBuf);
 	SendMessage(hWnd, LB_INSERTSTRING, 0, (LPARAM)szBuf);
 		
 	memset(szBuf, 0, sizeof(szBuf));
 	memset(szSN, 0, sizeof(szSN));
 	DevInfo::GetInstance()->c2w(pDev->szSN.c_str(), szSN);
-	wsprintf(szBuf, L"…Ë±∏±‡∫≈£∫%s", szSN);
+	wsprintf(szBuf, L"ËÆæÂ§áÁºñÂè∑Ôºö%s", szSN);
 	SendMessage(m_listBox, LB_ADDSTRING, 0, (LPARAM)szBuf);
 	SendMessage(hWnd, LB_INSERTSTRING, 0, (LPARAM)szBuf);
 		
 	memset(szBuf, 0, sizeof(szBuf));
 	GetLocalTime(&pDev->sysTime);
-	wsprintf(szBuf, L"Ω”»Î ±º‰£∫%d.%2d.%2d %2d:%2d:%2d", pDev->sysTime.wYear,
+	wsprintf(szBuf, L"Êé•ÂÖ•Êó∂Èó¥Ôºö%d.%2d.%2d %2d:%2d:%2d", pDev->sysTime.wYear,
 		pDev->sysTime.wMonth, pDev->sysTime.wDay,
 		pDev->sysTime.wHour, pDev->sysTime.wMinute, pDev->sysTime.wSecond);
 	SendMessage(m_listBox, LB_ADDSTRING, 0, (LPARAM)szBuf);
@@ -289,7 +289,7 @@ HWND BlockDlg::InitDlg(HINSTANCE& hInstance, HWND& hParent)
 		return NULL;
 	}
 	//set text
-	SendMessage(m_staticText, WM_SETTEXT, NULL, (LPARAM)L"«Î—°‘Ò…Ë±∏£∫");
+	SendMessage(m_staticText, WM_SETTEXT, NULL, (LPARAM)L"ËØ∑ÈÄâÊã©ËÆæÂ§áÔºö");
 
 	//combo box control
 	m_comboBox = CreateWindow(L"COMBOBOX", NULL, WS_CHILD | WS_VISIBLE \
@@ -307,7 +307,7 @@ HWND BlockDlg::InitDlg(HINSTANCE& hInstance, HWND& hParent)
 		MessageBox(GetForegroundWindow(), L"ERROR! Create list box failed!", L"ERROR", MB_ICONERROR);
 		return NULL;
 	}
-	SendMessage(m_btnAuth, WM_SETTEXT, NULL, (LPARAM)L"’˝≥£¥Úø™");
+	SendMessage(m_btnAuth, WM_SETTEXT, NULL, (LPARAM)L"Ê≠£Â∏∏ÊâìÂºÄ");
 
 	//read only button
 	m_btnReadOnly = CreateWindow(L"BUTTON", NULL, WS_CHILD | WS_VISIBLE \
@@ -317,7 +317,7 @@ HWND BlockDlg::InitDlg(HINSTANCE& hInstance, HWND& hParent)
 		MessageBox(GetForegroundWindow(), L"ERROR! Create list box failed!", L"ERROR", MB_ICONERROR);
 		return NULL;
 	}
-	SendMessage(m_btnReadOnly, WM_SETTEXT, NULL, (LPARAM)L"÷ª∂¡¥Úø™");
+	SendMessage(m_btnReadOnly, WM_SETTEXT, NULL, (LPARAM)L"Âè™ËØªÊâìÂºÄ");
 
 	//set transparent
 	SetWindowLong(m_blockDlg, GWL_EXSTYLE, GetWindowLong(m_blockDlg, GWL_EXSTYLE) | WS_EX_LAYERED);
