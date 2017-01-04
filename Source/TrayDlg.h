@@ -223,7 +223,7 @@ BOOL TrayDlg::InserColumn()
 	lvc.mask = LVCF_TEXT | LVCF_WIDTH | LVCF_FMT | LVCF_SUBITEM;
 
 	/*1. serial number*/
-	lvc.pszText = L"Éè±¸±àºÅ";
+	lvc.pszText = L"è®¾å¤‡ç¼–å·";
 	lvc.cx = 230;
 	lvc.iSubItem = 1;
 	lvc.fmt = LVCFMT_RIGHT;
@@ -235,7 +235,7 @@ BOOL TrayDlg::InserColumn()
 	
 
 	/*2. validity	*/
-	lvc.pszText = L"Éè±¸×´Ì¬";
+	lvc.pszText = L"è®¾å¤‡çŠ¶æ€";
 	lvc.cx = 70;
 	lvc.iSubItem = 2;
 	lvc.fmt = LVCFMT_RIGHT;
@@ -245,7 +245,7 @@ BOOL TrayDlg::InserColumn()
 		return FALSE;
 	}
 	/*3. access	privilege*/
-	lvc.pszText = L"Ê¹ÓÃÈ¨ÏŞ";
+	lvc.pszText = L"ä½¿ç”¨æƒé™";
 	lvc.cx = 70;
 	lvc.iSubItem = 3;                            
 	lvc.fmt = LVCFMT_RIGHT;
@@ -255,7 +255,7 @@ BOOL TrayDlg::InserColumn()
 		return FALSE;
 	}
 	/*4. name of the disk	*/
-	lvc.pszText = L"Éè±¸Ãû³Æ";
+	lvc.pszText = L"è®¾å¤‡åç§°";
 	lvc.cx = 120;
 	lvc.iSubItem = 0;
 	lvc.fmt = LVCFMT_LEFT;
@@ -265,7 +265,7 @@ BOOL TrayDlg::InserColumn()
 		return FALSE;
 	}
 	/*5. maximum capacity	*/
-	lvc.pszText = L"Éè±¸ÈİÁ¿";
+	lvc.pszText = L"è®¾å¤‡å®¹é‡";
 	lvc.cx = 70;
 	lvc.iSubItem = 4;
 	lvc.fmt = LVCFMT_RIGHT;
@@ -275,7 +275,7 @@ BOOL TrayDlg::InserColumn()
 		return FALSE;
 	}
 	/*6. time of being plugged*/
-	lvc.pszText = L"Á¬½ÓÊ±¼ä";
+	lvc.pszText = L"è¿æ¥æ—¶é—´";
 	lvc.cx = 150;
 	lvc.iSubItem = 5;
 	lvc.fmt = LVCFMT_RIGHT;
@@ -299,7 +299,7 @@ BOOL TrayDlg::UpdateLVInfo()
 
 	lvi.mask = LVIF_TEXT;
 	lvi.iSubItem = 2;
-	lvi.pszText = L"¶Ï¿ª";
+	lvi.pszText = L"æ–­å¼€";
 
 	for (int i = 0; i < itemCount; ++i)
 	{
@@ -312,7 +312,7 @@ BOOL TrayDlg::UpdateLVInfo()
 	return TRUE;
 }
 
-//? ÕâÀïµ÷ÓÃ¶àÏß³ÌÀ´Ğ´Èë
+//? è¿™é‡Œè°ƒç”¨å¤šçº¿ç¨‹æ¥å†™å…¥
 VOID TrayDlg::AddRecord()
 {
 	PDEVICEINFO pDev = DevInfo::GetInstance()->QueryInfoRequired();
@@ -338,16 +338,16 @@ VOID TrayDlg::AddRecord()
 	
 	lvi.iSubItem = 2;
 	if (pDev->bStatus)
-		lvi.pszText = L"Á¬½Ó";
+		lvi.pszText = L"è¿æ¥";
 	else
-		lvi.pszText = L"¶Ï¿ª";
+		lvi.pszText = L"æ–­å¼€";
 	b = ListView_SetItem(m_listView, &lvi);
 	
 	lvi.iSubItem = 3;
 	if (pDev->bMode)
-		lvi.pszText = L"¶ÁĞ´";
+		lvi.pszText = L"è¯»å†™";
 	else
-		lvi.pszText = L"Ö»¶Á";
+		lvi.pszText = L"åªè¯»";
 	b = ListView_SetItem(m_listView, &lvi);
 
 	lvi.iSubItem = 4;
@@ -379,7 +379,7 @@ VOID TrayDlg::AddWrongRecod(int nWrongCount)
 	GetLocalTime(&st);
 
 	memset(szBuf, 0, sizeof(szBuf));
-	wsprintf(szBuf, L"%d.%2d.%2d %2d:%2d:%2d ÓÃ»§³¢ÊÔ´íÎóÃÜÂë£¡ µ±Ç°×Ü´íÎó´ÎÊı£º%d",
+	wsprintf(szBuf, L"%d.%2d.%2d %2d:%2d:%2d ç”¨æˆ·å°è¯•é”™è¯¯å¯†ç ï¼ å½“å‰æ€»é”™è¯¯æ¬¡æ•°ï¼š%d",
 		st.wYear, st.wMonth, st.wDay, st.wHour,
 		st.wMinute, st.wSecond, nWrongCount);
 	SendMessage(m_listBox, LB_INSERTSTRING, 0, (LPARAM)szBuf);
@@ -436,7 +436,7 @@ BOOL TrayDlg::StatusIcon::PopMenu(HWND& hWnd)
 {
 	GetCursorPos(&point);
 	hPopupMenu = CreatePopupMenu();
-	AppendMenu(hPopupMenu, MF_STRING, IDM_EXIT, L"ÍË    ³ö");
+	AppendMenu(hPopupMenu, MF_STRING, IDM_EXIT, L"é€€    å‡º");
 	TrackPopupMenu(hPopupMenu, TPM_LEFTALIGN, point.x, point.y, 0, hWnd, NULL);
 	//DestroyMenu(hPopupMenu);
 	return TRUE;
@@ -446,9 +446,9 @@ BOOL TrayDlg::OptionMenu(HWND& hWnd)
 {
 	GetCursorPos(&m_statusIcon.point);
 	hOptionMenu = CreatePopupMenu();
-	AppendMenu(hOptionMenu, MF_STRING, IDM_ADDEXCLU, L"Ìí¼ÓÈ¨ÏŞ");
-	AppendMenu(hOptionMenu, MF_STRING, IDM_RMEXCLU, L"ÒÆ³ıÈ¨ÏŞ");
-	AppendMenu(hOptionMenu, MF_STRING, IDM_CLEAR, L"Çå³ı¼ÇÂ¼");
+	AppendMenu(hOptionMenu, MF_STRING, IDM_ADDEXCLU, L"æ·»åŠ æƒé™");
+	AppendMenu(hOptionMenu, MF_STRING, IDM_RMEXCLU, L"ç§»é™¤æƒé™");
+	AppendMenu(hOptionMenu, MF_STRING, IDM_CLEAR, L"æ¸…é™¤è®°å½•");
 	TrackPopupMenu(hOptionMenu, TPM_LEFTALIGN, m_statusIcon.point.x,
 		m_statusIcon.point.y, 0, hWnd, NULL);
 	DestroyMenu(hOptionMenu);
@@ -508,7 +508,7 @@ HWND TrayDlg::InitDlg(HINSTANCE& hInstance)
 	}
 	
 	//create refresh button
-	m_btnRefresh = CreateWindow(L"BUTTON", L"Ë¢ĞÂ", WS_CHILD | WS_VISIBLE \
+	m_btnRefresh = CreateWindow(L"BUTTON", L"åˆ·æ–°", WS_CHILD | WS_VISIBLE \
 		| BS_TEXT | BS_PUSHLIKE | BS_PUSHBUTTON, width - 80, height - 50, 60, 30, m_trayDlg, NULL, hInstance, NULL);
 	if (!m_btnRefresh)
 	{
