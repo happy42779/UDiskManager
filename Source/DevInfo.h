@@ -459,10 +459,10 @@ PDEVICEINFO DevInfo::QueryInfoRequired()
 	pInfo->dwDiskSpace = ulDiskSpace.QuadPart >> 20;
 
 	ret = devRecord.insert(make_pair(pInfo->szSN, devinfo.size()));
-	if (FALSE == ret.second)//Èç¹û²åÈëÊ§°Ü,ÔòÖ¤Ã÷´æÔÚ
+	if (FALSE == ret.second)//å¦‚æžœæ’å…¥å¤±è´¥,åˆ™è¯æ˜Žå­˜åœ¨
 	{
 		it = devRecord.find(pInfo->szSN);
-		//if (it == devRecord.end())		 //²»Ó¦¸Ã»áÕÒ²»µ½
+		//if (it == devRecord.end())		 //ä¸åº”è¯¥ä¼šæ‰¾ä¸åˆ°
 		devinfo[ret.first->second] = pInfo;
 	}	
 	else
