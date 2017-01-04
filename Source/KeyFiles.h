@@ -124,25 +124,25 @@ BOOL KeyFiles::GenerateKF()
 		groupRand = rand() % 4 + 1;
 		switch (groupRand)
 		{
-		case 1:					//Ğ¡Ğ´×ÖÄ¸
+		case 1:					//å°å†™å­—æ¯
 		{
 			charRand = rand() % 26;
 			CharToWrite = lowerCaseEnum[charRand];
 		}
 		break;
-		case 2:					//´óĞ´×ÖÄ¸
+		case 2:					//å¤§å†™å­—æ¯
 		{
 			charRand = rand() % 26;
 			CharToWrite = upperCaseEnum[charRand];
 		}
 		break;
-		case 3:				    //Êı×Ö
+		case 3:				    //æ•°å­—
 		{
 			charRand = rand() % 9;
 			CharToWrite = numberEnum[charRand];
 		}
 		break;
-		case 4:				    //×Ö·û
+		case 4:				    //å­—ç¬¦
 		{
 			charRand = rand() % 31;
 			CharToWrite = specialMarkEnum[charRand];
@@ -171,7 +171,7 @@ BOOL KeyFiles::VerifyPWD(const TCHAR* pszPWD)
 	//char* pwdBuf = (char*)malloc(sizeof(szKeyBuffer));
 	//memset(pwdBuf, 0, sizeof(szKeyBuffer));
 
-	//szMD5ÖĞÃ»ÓĞÊı¾İ£¬»òÕßÃÜÂëÊäÈë´íÎóÖ®ºó£¬ÖØĞÂ¶ÁÈ¡buffer
+	//szMD5ä¸­æ²¡æœ‰æ•°æ®ï¼Œæˆ–è€…å¯†ç è¾“å…¥é”™è¯¯ä¹‹åï¼Œé‡æ–°è¯»å–buffer
 	if (szMD5Buf[0] == '\0' || nWrongTrial)
 		if (!ReadPWDBuffer())
 			return FALSE;
@@ -403,21 +403,21 @@ DWORD WINAPI KeyFiles::ThreadProc(LPVOID lpParam)
 
 BOOL KeyFiles::CalcPos(int& iPWDLen, int*& iPWDPos)
 {	
-	//·ÖÇøĞòÁĞºÅ
+	//åˆ†åŒºåºåˆ—å·
 	char szSN[256] = { 0 };		
 	DWORD dwVolSN = -1;
 	
-	//»ñÈ¡·ÖÇøĞòÁĞºÅ
+	//è·å–åˆ†åŒºåºåˆ—å·
 	if (!GetVolumeInformation(L"C:\\", NULL, NULL, &dwVolSN, 0, 0, NULL, 0))
 	{
 		MessageBox(NULL, L"GetVolumeInformation failed", L"ERROR", MB_OK | MB_ICONERROR);
 		return FALSE;
 	}	
 
-	sprintf(szSN, "%u", dwVolSN); //×ª»»dword Îª ×Ö·û´æÔÚÊı×éµ±ÖĞ
-	int iSNLen = strlen(szSN);	  //»ñÈ¡ĞòÁĞºÅ³¤¶È
-	//»ñÈ¡´æ´¢Î»ÖÃ
-	//µ±ÃÜÂë³¤¶ÈĞ¡ÓÚĞòÁĞºÅµÄÃÜÂë×éºÏÊ±
+	sprintf(szSN, "%u", dwVolSN); //è½¬æ¢dword ä¸º å­—ç¬¦å­˜åœ¨æ•°ç»„å½“ä¸­
+	int iSNLen = strlen(szSN);	  //è·å–åºåˆ—å·é•¿åº¦
+	//è·å–å­˜å‚¨ä½ç½®
+	//å½“å¯†ç é•¿åº¦å°äºåºåˆ—å·çš„å¯†ç ç»„åˆæ—¶
 	int i, j;
 	int iPosCnt = 0;
 	for (i = 0; i < iSNLen - 1; ++i)
